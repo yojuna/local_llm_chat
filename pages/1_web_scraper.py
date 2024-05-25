@@ -84,6 +84,7 @@ def playwright_install():
     """
     with st.spinner("Setting up playwright 🎭"):
         os.system("playwright install")
+        os.system('playwright install-deps')
 
 
 def add_download_options(result: str):
@@ -134,7 +135,8 @@ left_co, cent_co, last_co = st.columns(3)
 with cent_co:
     st.image("assets/scrapegraphai_logo.png")
 
-key = st.text_input("Openai API key", type="password")
+# key = st.text_input("Openai API key", type="password")
+key = st.secrets.openai_key
 model = st.radio(
     "Select the model",
     ["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4", "text-to-speech", "gpt-4o"],
