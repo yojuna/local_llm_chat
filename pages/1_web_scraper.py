@@ -10,7 +10,102 @@ from helper import (
 from task import task
 from text_to_speech import text_to_speech
 
+from scrapegraphai.graphs import SpeechGraph, SmartScraperGraph
+
+# from scrapegraphai.graphs import SmartScraperGraph
+
+def task(key:str, url:str, prompt:str, model:str, base_url=None):
+    """ 
+    Task that execute the scraping:
+        Arguments:
+        - key (str): key of the model
+        - url (str): url to scrape 
+        - prompt (str): prompt
+        - model (str): name of the model
+        Return:
+        - results_df["output"] (dict): result as a dictionary
+        - results_df (pd.Dataframe()): result as padnas df
+    """ 
+    if base_url is not None:
+        graph_config = {
+            "llm": {
+                "api_key": key,
+                "model": model,
+            },
+        }
+    else: 
+        graph_config = {
+        "llm": {
+            "api_key": key,
+            "model": model,
+            "openai_api_base": base_url,
+        },
+}
+
+    # ************************************************
+    # Create the SmartScraperGraph instance and run it
+    # ************************************************
+
+    smart_scraper_graph = SmartScraperGraph(
+        prompt=prompt,
+        # also accepts a string with the already downloaded HTML code
+        source=url,
+        config=graph_config
+    )
+
+    result = smart_scraper_graph.run()
+    return result
+
+def text_to_speech(api_key: str, prompt: str, url: str):
+    """Reads text after the prompt from a given URL.
+
+    Args:
+        - api_key (str): OpenAI API key
+        - prompt (str): Prompt to use
+        - url (str): URL to scrape
+    Returns:
+        - str: Path to the generated audio file
+    """
+    llm_config = {"api_key": api_key}
+    
+    # Define the name of the audio file
+    audio_file = "audio_result.mp3"
+
+    # Create and run the speech summary graph
+    speech_summary_graph = SpeechGraph(prompt, url, llm_config, audio_file)
+    return speech_summary_graph.run()
+
 st.set_page_config(page_title="Scrapegraph-ai demo", page_icon="🕷️")
+
+def playwright_install():
+    """
+    Install playwright browsers
+    https://discuss.streamlit.io/t/using-playwright-with-streamlit/28380/11
+    """
+    with st.spinner("Setting up playwright 🎭"):
+        os.system("playwright install")
+
+
+def add_download_options(result: str):
+    """
+    Adds download buttons for graph result.
+    """
+    st.download_button(
+        label="Download JSON",
+        data=json.dumps(result, indent=4),
+        file_name="scraped_data.json",
+        mime="application/json"
+    )
+
+    df = pd.DataFrame(result)
+    csv = df.to_csv(index=False)
+    st.download_button(
+        label="Download CSV",
+        data=csv,
+        file_name="scraped_data.csv",
+        mime="text/csv"
+    )
+
 
 # Install playwright browsers
 playwright_install()
