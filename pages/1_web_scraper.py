@@ -75,7 +75,7 @@ def text_to_speech(api_key: str, prompt: str, url: str):
     speech_summary_graph = SpeechGraph(prompt, url, llm_config, audio_file)
     return speech_summary_graph.run()
 
-st.set_page_config(page_title="Scrapegraph-ai demo", page_icon="🕷️")
+st.set_page_config(page_title="llm powered smart web crawler", page_icon="🕷️")
 
 def playwright_install():
     """
@@ -117,7 +117,7 @@ def save_email(email):
 
 with st.sidebar:
     # st.write("Official demo for [Scrapegraph-ai](https://github.com/VinciGit00/Scrapegraph-ai) library")
-    st.markdown("""---""")
+    # st.markdown("""---""")
     st.write("# Usage Examples")
     st.write("## Prompt 1")
     st.write("- Give me all the news with their abstracts")
@@ -130,7 +130,7 @@ with st.sidebar:
     # st.markdown("""---""")
     # st.write("You want to suggest tips or improvements? Contact me through email to mvincig11@gmail.com")
 
-st.title("SMART WEB CRAWLER ")
+st.title("smart web crawler and scraper")
 # left_co, cent_co, last_co = st.columns(3)
 # with cent_co:
 #     st.image("assets/scrapegraphai_logo.png")
