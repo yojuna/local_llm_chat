@@ -7,6 +7,9 @@ try:
 except ImportError:
   from llama_index.core import VectorStoreIndex, ServiceContext, Document, SimpleDirectoryReader
 
+data_dir_ = "./data/hackmining"
+chat_mode_ = "condense_question"
+
 system_prompt_ = "You are a technical research assistant in the domain of mining and mineral processing. \
                                             You speacialize in recommending technical design parameters and are an expert in giving suggestions based on the corpus of technical documents provided. \
                                             Be as helpful and descriptive as you can be. Always refer to the loaded technical documents and give references to the documents from where the information was found."
@@ -24,7 +27,7 @@ if "messages" not in st.session_state.keys(): # Initialize the chat messages his
 @st.cache_resource(show_spinner=True)
 def load_data():
     with st.spinner(text="Loading and indexing the technical docs – hang tight! This should take 1-2 minutes."):
-        reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
+        reader = SimpleDirectoryReader(input_dir=data_dir_, recursive=True)
         docs = reader.load_data()
         # llm = OpenAI(model="gpt-3.5-turbo", temperature=0.5, system_prompt="You are an expert o$
         # index = VectorStoreIndex.from_documents(docs)
@@ -35,7 +38,7 @@ def load_data():
 index = load_data()
 
 if "chat_engine" not in st.session_state.keys(): # Initialize the chat engine
-        st.session_state.chat_engine = index.as_chat_engine(chat_mode="condense_question", verbose=True)
+        st.session_state.chat_engine = index.as_chat_engine(chat_mode=chat_mode_, verbose=True)
 
 if prompt := st.chat_input("Your question"): # Prompt for user input and save to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
