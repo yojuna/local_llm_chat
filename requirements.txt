@@ -4,3 +4,5 @@ llama-index
 llama-index-llms-openai
 nltk
 pypdf
+pandas>=2.2.2
+scrapegraphai==1.2.4
