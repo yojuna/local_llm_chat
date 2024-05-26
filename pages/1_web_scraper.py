@@ -12,7 +12,7 @@ import pandas as pd
 
 from scrapegraphai.graphs import SpeechGraph, SmartScraperGraph
 
-st.set_page_config(page_title="local LLM powered smart web crawler", page_icon="🕷️")
+st.set_page_config(page_title="local LLM powered smart web crawler", page_icon="🕷️", layout="wide", initial_sidebar_state="auto", menu_items=None)
 
 def task(key:str, url:str, prompt:str, model:str, base_url=None):
     """ 
