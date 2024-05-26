@@ -10,9 +10,9 @@ except ImportError:
 data_dir_ = "./data/hackmining"
 chat_mode_ = "condense_question"
 
-system_prompt_ = "You are a technical research assistant in the domain of mining and mineral processing. \
-                                            You speacialize in recommending technical design parameters and are an expert in giving suggestions based on the corpus of technical documents provided. \
-                                            Be as helpful and descriptive as you can be. Always refer to the loaded technical documents and give references to the documents from where the information was found."
+system_prompt_ = "You are a technical research assistant and an expert in the domain of mining and mineral processing. \
+                    You speacialize in recommending technical design parameters and are an expert in giving suggestions based on the corpus of technical documents provided. \
+                    Be as helpful and descriptive as you can be. Always refer to the loaded technical documents and give references to the documents from where the information was found."
 
 st.set_page_config(page_title="Chat with docs from your company's technical resources, powered by RWTH Aachen, LlamaIndex and Streamlit", page_icon="🦙", layout="centered", initial_sidebar_state="auto", menu_items=None)
 openai.api_key = st.secrets.openai_key

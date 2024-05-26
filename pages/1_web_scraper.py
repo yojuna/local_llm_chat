@@ -12,7 +12,7 @@ import pandas as pd
 
 from scrapegraphai.graphs import SpeechGraph, SmartScraperGraph
 
-# from scrapegraphai.graphs import SmartScraperGraph
+st.set_page_config(page_title="local LLM powered smart web crawler", page_icon="🕷️")
 
 def task(key:str, url:str, prompt:str, model:str, base_url=None):
     """ 
@@ -75,7 +75,6 @@ def text_to_speech(api_key: str, prompt: str, url: str):
     speech_summary_graph = SpeechGraph(prompt, url, llm_config, audio_file)
     return speech_summary_graph.run()
 
-st.set_page_config(page_title="llm powered smart web crawler", page_icon="🕷️")
 
 def playwright_install():
     """
@@ -120,10 +119,10 @@ with st.sidebar:
     # st.markdown("""---""")
     st.write("# Usage Examples")
     st.write("## Prompt 1")
-    st.write("- Give me all the news with their abstracts")
+    st.write("- Give detailed descriptions of all the product listings on this page")
     st.write("## Prompt 2")
-    st.write("- Create a voice summary of the webpage")
-    st.write("## Prompt 3")
+    st.write("- Get links and detailed descriptions of all the relevant listings on this page")
+    # st.write("## Prompt 3")
     # st.write("- List me all the images with their visual description")
     # st.write("## Prompt 4")
     # st.write("- Read me the summary of the news")
