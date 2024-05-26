@@ -12,8 +12,8 @@ import pandas as pd
 import os
 
 data_dir_ = "data/hackmining"
-# chat_mode_ = "condense_question"
-chat_mode_ = "condense_plus_context"
+chat_mode_ = "condense_question"
+# chat_mode_ = "condense_plus_context"
 
 system_prompt_ = "You are a technical research assistant and an expert in the domain of mining and mineral processing. \
                     You speacialize in recommending technical design parameters and are an expert in giving suggestions based on the corpus of technical documents provided. \
