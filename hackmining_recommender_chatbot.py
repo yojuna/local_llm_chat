@@ -21,7 +21,7 @@ system_prompt_ = "You are a technical research assistant and an expert in the do
 
 st.set_page_config(page_title="Chat with docs from your company's technical resources, powered by RWTH Aachen, LlamaIndex and Streamlit", page_icon="🦙", layout="wide", initial_sidebar_state="auto", menu_items=None)
 openai.api_key = st.secrets.openai_key
-st.title("Plant Design Recommendation System")
+st.title("MAGIC: The Mining And Geotechnical Information Chatbot")
 st.info("", icon="📃")
          
 if "messages" not in st.session_state.keys(): # Initialize the chat messages history
@@ -57,12 +57,9 @@ else:
     datasets = st.session_state["datasets"]
 
 with st.sidebar:
-    # First we want to choose the dataset, but we will fill it with choices once we've loaded one
-    dataset_container = st.empty()
-
     # Add facility to upload a dataset
     try:
-        uploaded_files = st.file_uploader(":computer: Load your document:", accept_multiple_files=True)
+        uploaded_files = st.file_uploader(":computer: Load the documents you need:", accept_multiple_files=True)
         index_no=0
         if uploaded_files:
             for uploaded_file in uploaded_files:
@@ -80,9 +77,12 @@ with st.sidebar:
     except Exception as e:
         st.error("File failed to load. Please select a valid data file.")
         print("File failed to load.\n" + str(e))
+
+    # First we want to choose the dataset, but we will fill it with choices once we've loaded one
+    dataset_container = st.empty()
     # Radio buttons for dataset choice
     dataset_files = [keyfile.split('/')[-1] for keyfile in datasets.keys()]
-    chosen_dataset = dataset_container.radio(":bar_chart: Choose your data:",dataset_files,index=index_no)#,horizontal=True,)
+    chosen_dataset = dataset_container.radio(":bar_chart: referenced datasets:", dataset_files,index=index_no)#,horizontal=True,)
     # option = st.sidebar.selectbox('loaded datasets', all_files)
 
     # # Check boxes for model choice

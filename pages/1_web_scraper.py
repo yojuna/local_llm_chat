@@ -129,7 +129,7 @@ with st.sidebar:
     # st.markdown("""---""")
     # st.write("You want to suggest tips or improvements? Contact me through email to mvincig11@gmail.com")
 
-st.title("smart web crawler and scraper")
+st.title("LLM powered web crawler and scraper")
 # left_co, cent_co, last_co = st.columns(3)
 # with cent_co:
 #     st.image("assets/scrapegraphai_logo.png")
@@ -138,13 +138,14 @@ st.title("smart web crawler and scraper")
 key = st.secrets.openai_key
 model = st.radio(
     "Select the model",
-    ["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4", "text-to-speech", "gpt-4o"],
+    ["gpt-4", "gpt-4o", "gpt-3.5-turbo"],
     index=0,
 )
 
-url = st.text_input("base url (optional)")
+
 link_to_scrape = st.text_input("Link to scrape")
 prompt = st.text_input("Write the prompt")
+url = st.text_input("base url (optional)")
 
 if st.button("Run the program", type="primary"):
     if not key or not model or not link_to_scrape or not prompt:
@@ -166,9 +167,34 @@ if st.button("Run the program", type="primary"):
             print(graph_result)
             st.write("# Answer")
             st.write(graph_result)
+            add_download_options(graph_result)
+            
+            # links = []
+            # for data in graph_result['listings']:
+            #     links = data['link']
 
-            if graph_result:
-                add_download_options(graph_result)
+            if graph_result and graph_result['listings'][0]['link']:
+                st.write("# Add to the master db")
+
+                # add_download_options(graph_result)
+                links = [data['link'] for data in graph_result['listings']]
+
+                with st.container():
+                # Radio buttons for dataset choice
+                    for link in links:
+                        chosen_dataset = st.checkbox(link, key=link)
+
+                print(graph_result)
+                print(links)
+
+
+
+
+# {'listings': [{'title': 'Standard-Haube Metall', 'description': 'Unser Klassiker ist in elf Norm-Abmessungen für jedes Förderband verwendbar.', 'link': 'https://www.achenbach-mt.de/abdeckhauben/standard-haube-metall'}, 
+# {'title': 'Standard-Haube Kunststoff', 'description': 'Organit Hart-PVC Abdeckhauben ergänzen das Produktportfolio für sensible Branchen.', 'link': 'https://www.achenbach-mt.de/abdeckhauben/standard-haube-kunststoff'}, 
+# {'title': 'Individuelle Hauben', 'description': 'A-Flex-System, Jumbo-Haube, Arena oder Stichbogen-Haube individuell für Ihr Projekt.', 'link': 'https://www.achenbach-mt.de/abdeckhauben/individuelle-hauben'}, 
+# {'title': 'Hauben Befestigungen', 'description': 'Entdecken Sie Befestigungssysteme und Zubehör für unsere Metallhauben.', 'link': 'https://www.achenbach-mt.de/abdeckhauben/hauben-befestigungen'}]}
+
 
 # left_co2, *_, cent_co2, last_co2, last_c3 = st.columns([1] * 18)
 
