@@ -108,8 +108,10 @@ with st.sidebar:
 #         st.subheader(dataset_name)
 #         # st.dataframe(datasets[dataset_name],hide_index=True)
 
-index = load_data()
-
+try:
+    index = load_data()
+except Exception as e:
+    print(f"error occured: {e}")
 if "chat_engine" not in st.session_state.keys(): # Initialize the chat engine
         st.session_state.chat_engine = index.as_chat_engine(chat_mode=chat_mode_, verbose=True)
 
