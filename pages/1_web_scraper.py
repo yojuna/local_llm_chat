@@ -135,7 +135,9 @@ st.title("LLM powered web crawler and scraper")
 #     st.image("assets/scrapegraphai_logo.png")
 
 # key = st.text_input("Openai API key", type="password")
-key = st.secrets.openai_key
+# key = st.secrets.openai_key
+key = st.text_input(label = ":key: OpenAI Key:", help="Required for ChatGPT-4, ChatGPT-3.5, GPT-3, GPT-3.5 Instruct.",type="password")
+
 model = st.radio(
     "Select the model",
     ["gpt-4", "gpt-4o", "gpt-3.5-turbo"],

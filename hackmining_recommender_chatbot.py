@@ -20,7 +20,8 @@ system_prompt_ = "You are a technical research assistant and an expert in the do
                     Be as helpful and descriptive as you can be. Always refer to the loaded technical documents and give references to the documents from where the information was found."
 
 st.set_page_config(page_title="Chat with docs from your company's technical resources, powered by RWTH Aachen, LlamaIndex and Streamlit", page_icon="🦙", layout="wide", initial_sidebar_state="auto", menu_items=None)
-openai.api_key = st.secrets.openai_key
+# openai.api_key = st.secrets.openai_key
+openai.api_key = st.text_input(label = ":key: OpenAI Key:", help="Required for ChatGPT-4, ChatGPT-3.5, GPT-3, GPT-3.5 Instruct.",type="password")
 st.title("MAGIC: The Mining And Geotechnical Information Chatbot")
 st.info("", icon="📃")
          
