@@ -36,7 +36,7 @@ def load_data():
         docs = reader.load_data()
         # llm = OpenAI(model="gpt-3.5-turbo", temperature=0.5, system_prompt="You are an expert o$
         # index = VectorStoreIndex.from_documents(docs)
-        service_context = ServiceContext.from_defaults(llm=OpenAI(model="gpt-4", temperature=0.5, system_prompt=system_prompt_))
+        service_context = ServiceContext.from_defaults(llm=OpenAI(model="gpt-4", temperature=0.4, system_prompt=system_prompt_))
         index = VectorStoreIndex.from_documents(docs, service_context=service_context)
         return index
 
@@ -127,3 +127,15 @@ if st.session_state.messages[-1]["role"] != "assistant":
             st.write(response.response)
             message = {"role": "assistant", "content": response.response}
             st.session_state.messages.append(message) # Add response to message history
+
+
+
+## prompts
+
+# https://hackmining-recommender-chat.streamlit.app/
+
+# what does the data describe in general. give a brief overview
+
+# which type of machines all have throughput greater than 80 tons per hour. give the reference to the document from which this information was found
+
+# what are all the recommended machines, conveyors and separators that should be used together which optimize high throughput and low power consumption. also give the references to the documents from which this information was found

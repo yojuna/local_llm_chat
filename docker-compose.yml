@@ -1,0 +1,10 @@
+version: '3'
+services:
+  local_llm_chat:
+    image: local_llm_chat
+    build: ./app
+    command: streamlit run hackmining_recommender_chatbot.py --server.port 8051
+    volumes:
+      - ./:/app/
+    ports:
+      - 8051:8051
