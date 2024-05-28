@@ -105,6 +105,10 @@ draft jupyter colab notebooks
 
 - [Multiple documents agents based rag](https://colab.research.google.com/drive/1QENAK2QsLn01qAjfSWvByfIevrTgJVNE?usp=sharing)
 
+Alternatively, access them as jupyter notebooks for local development from the `notebooks` folder.
+
+
+
 ### LlamaIndex
 
 - LlamaIndex official docs
